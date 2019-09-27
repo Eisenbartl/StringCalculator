@@ -1,4 +1,4 @@
-const addNumbers = (string, cb) => {
+const addNumbers = string => {
   const newString = string.replace(/\\n/g, ',').replace(/[a-z]/g, 0).split(',');
   const posArray = [];
   const negArray = [];
