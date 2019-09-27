@@ -14,9 +14,10 @@ describe('Logic', () => {
       expect(addNumbers('20')).to.eql({ sum: '20', exceptions: [] });
     });
 
-    it('addNumbers should accept 2 numbers', () => {
-      expect(addNumbers('1,5000')).to.eql({ sum: '5001', exceptions: [] });
-    });
+    // commented out for step 5
+    // it('addNumbers should accept 2 numbers', () => {
+    //   expect(addNumbers('1,5000')).to.eql({ sum: '5001', exceptions: [] });
+    // });
 
     // step one test
     // it('addNumbers should only accept 2 numbers', () => {
@@ -45,12 +46,16 @@ describe('Logic', () => {
     //   expect(addNumbers('1\n2,3')).to.equal(6);
     // });
 
-    it('addNumbers should accept numbers with decimals', () => {
-      expect(addNumbers('5,5')).to.eql({ sum: '10', exceptions: [] });
-    });
-
     it('addNumbers should only add positive numbers and place negative numbers in the exceptions array', () => {
       expect(addNumbers('6,-1,2,-3')).to.eql({ sum: '8', exceptions: ['-1', '-3'] });
+    });
+
+    it('addNumbers should not accept numbers greater than 1001', () => {
+      expect(addNumbers('5,1001,2')).to.eql({ sum: '7', exceptions: [] });
+    });
+
+    it('addNumbers should not accept numbers greater than 1001', () => {
+      expect(addNumbers('5,1000.1,5')).to.eql({ sum: '10', exceptions: [] });
     });
   });
 });

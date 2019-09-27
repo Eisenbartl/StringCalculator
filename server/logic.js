@@ -9,7 +9,7 @@ const addNumbers = string => {
   } else {
     for (let i = 0; i < newString.length; i++) {
       // if char is a positive number, push to posArry
-      if (!isNaN(parseFloat(newString[i])) && Number(newString[i]) > -1) {
+      if (!isNaN(parseFloat(newString[i])) && Number(newString[i]) > -1 && Number(newString[i] <= 1000)) {
         posArray.push(newString[i])
       }
       // if char is a negative number, push to negArray
