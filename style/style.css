@@ -1,0 +1,34 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.calculator-i-o {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.calculator-input,
+.calculator-output {
+  height: 60px;
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0.5rem;
+  text-align: right;
+}
+
+.calculator-input {
+  border: none;
+  /* border-bottom: 1px solid #000; */
+  outline: none;
+}
+
+.calculator-btn {
+  height: 40px;
+  width: 100px;
+  font-size: 1.1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}

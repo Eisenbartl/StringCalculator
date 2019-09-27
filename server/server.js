@@ -8,7 +8,9 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
 
 app.post('/', (req, res) => {
-  console.log('hello')
+  const input = req.body.input;
+  // send results back as a string
+  res.send(logic(input).toString());
 });
 
 app.listen(port, () => console.log('Server running on port ', port));
