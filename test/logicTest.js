@@ -18,8 +18,12 @@ describe('Logic', () => {
       expect(addNumbers('1,5000')).to.equal(5001);
     });
 
-    it('addNumbers should only accept 2 numbers', () => {
-      expect(addNumbers('5,5,5')).to.equal(10);
+    // it('addNumbers should only accept 2 numbers', () => {
+    //   expect(addNumbers('5,5,5')).to.equal(10);
+    // });
+
+    it('addNumbers should accept unlimited numbers', () => {
+      expect(addNumbers('1,2,3,4,5,6,7,8,9,10,11,12')).to.equal(78);
     });
 
     it('addNumbers should convert empty string to 0', () => {
