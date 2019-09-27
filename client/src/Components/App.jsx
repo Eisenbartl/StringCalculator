@@ -8,11 +8,23 @@ class App extends React.Component {
 
     this.state = {
       input: '',
-      output: ''
+      output: '',
+      exceptions: ''
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.trackInput = this.trackInput.bind(this);
+  }
+
+  exceptionAlert() {
+    const exceptions = this.state.exceptions;
+    const array = [];
+    if (exceptions.length > 0) {
+      for(let i = 0; i < exceptions.length; i++) {
+        array.push(exceptions[i])
+      }
+      alert(`This app only allows positivity, begone with your negatives ${array}`)
+    }
   }
 
   handleClick() {
@@ -20,9 +32,11 @@ class App extends React.Component {
       .then(res =>
         this.setState({
           input: '', // clear input field
-          output: res.data // display result in output field
+          output: res.data.sum, // display result in output field
+          exceptions: res.data.exceptions
         })
       )
+      .then(() => this.exceptionAlert())
       .catch(err => console.log(err));
   }
 
