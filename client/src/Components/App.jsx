@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React from 'react';
+import Rules from './Rules.jsx';
 import Calculator from './Calculator.jsx';
 
 class App extends React.Component {
@@ -16,17 +17,26 @@ class App extends React.Component {
     this.trackInput = this.trackInput.bind(this);
   }
 
+  // function for displaying exeptions to user
   exceptionAlert() {
     const exceptions = this.state.exceptions;
     const array = [];
-    if (exceptions.length > 0) {
+    let error = 'formatting error, please see rules of use';
+
+    if (exceptions.length > 0 && exceptions[0] !== 'formatting error') {
       for(let i = 0; i < exceptions.length; i++) {
-        array.push(exceptions[i])
-      }
-      alert(`This app only allows positivity, begone with your negatives ${array}`)
+          array.push(exceptions[i])
+        }
+        error = `This app only allows positivity, begone with your negatives ${array}, see rules of use`
+        alert(error);
+    }
+
+    if (exceptions[0] === 'formatting error') {
+      alert(error)
     }
   }
 
+  // send user input to server via axios post request
   handleClick() {
     Axios.post('/', { input: this.state.input })
       .then(res =>
@@ -40,13 +50,15 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  // track user input function
   trackInput(e) {
     this.setState({ input: e.target.value });
   }
 
   render() {
     return (
-      <div>
+      <div className='app-body'>
+        <Rules />
         <Calculator
           handleClick={this.handleClick}
           trackInput={this.trackInput}

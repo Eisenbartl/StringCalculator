@@ -1,22 +1,27 @@
+const customDelim = input => {
+  let newInput;
+  if (input.match('//')) {
+    newLineSplit = input.split(/\\n/).join()
+    newInput = newLineSplit
+    .replace(/[a-z]/g, 0)
+    .split(input[2]) // splits on the custom dilimiter
+    .join()
+    .split(','); // splits one more time to complete separation
+  } else {
+    newInput = input
+    .replace(/\\n/g, ',')
+    .replace(/[a-z]/g, 0)
+    .split(',');
+  }
+
+  return newInput;
+}
+
 const addNumbers = string => {
-  let newString = string
-  .replace(/\\n/g, ',')
-  .replace(/[a-z]/g, 0)
-  .split(',');
+  let newString = customDelim(string)
   const posArray = [];
   const negArray = [];
-  const doubleSlash = '//'
   let sum = '';
-
-  // if (string.includes(doubleSlash)) {
-  //   customDelim = string[3];
-  //   let reg = new RegExp(customDelim, 'g');
-  //   newString = string
-  //     .replace(/\\n/g, ',')
-  //     .replace(/[a-z]/g, 0)
-  //     .split(',');
-  // }
-
 
   if (string === '') {
     sum = 0;
@@ -32,22 +37,26 @@ const addNumbers = string => {
       }
     }
 
-    // if posArr doesn't = 0, join posArray, replace all ',' with '+' and feed the result to eval method
+    // if posArr doesn't = 0 and if posArray has length > 1, join posArray, replace all ',' with '+' and feed the result to eval method
     if (posArray === ['0']) {
       sum = 0
+    } else if (posArray.length < 1) {
+      sum = 0;
+      negArray.push('formatting error')
     } else {
       sum = eval(posArray.join().replace(/,/g, '+'));
     }
   }
 
   // send back sum and any denied negative numbers
+  // const result = sum;
   const result = {
     sum: sum.toString(),
     exceptions: negArray
   }
+
   return result;
 };
 
-// addNumbers('//;\n2;5\n1;35')
-
-module.exports = addNumbers;
+module.exports = {addNumbers, customDelim};
+ 

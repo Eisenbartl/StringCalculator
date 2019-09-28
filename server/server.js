@@ -11,8 +11,7 @@ app.post('/', (req, res) => {
   const input = req.body.input;
   
   // send results back as a string
-  res.send(logic(input));
-  // console.log(logic(input));
+  res.send(logic.addNumbers(input));
 });
 
 app.listen(port, () => console.log('Server running on port ', port));
