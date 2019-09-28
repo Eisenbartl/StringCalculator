@@ -12,6 +12,7 @@ app.post('/', (req, res) => {
   
   // send results back as a string
   res.send(logic(input));
+  // console.log(logic(input));
 });
 
 app.listen(port, () => console.log('Server running on port ', port));

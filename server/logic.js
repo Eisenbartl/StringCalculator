@@ -1,8 +1,22 @@
 const addNumbers = string => {
-  const newString = string.replace(/\\n/g, ',').replace(/[a-z]/g, 0).split(',');
+  let newString = string
+  .replace(/\\n/g, ',')
+  .replace(/[a-z]/g, 0)
+  .split(',');
   const posArray = [];
   const negArray = [];
+  const doubleSlash = '//'
   let sum = '';
+
+  // if (string.includes(doubleSlash)) {
+  //   customDelim = string[3];
+  //   let reg = new RegExp(customDelim, 'g');
+  //   newString = string
+  //     .replace(/\\n/g, ',')
+  //     .replace(/[a-z]/g, 0)
+  //     .split(',');
+  // }
+
 
   if (string === '') {
     sum = 0;
@@ -33,5 +47,7 @@ const addNumbers = string => {
   }
   return result;
 };
+
+// addNumbers('//;\n2;5\n1;35')
 
 module.exports = addNumbers;
