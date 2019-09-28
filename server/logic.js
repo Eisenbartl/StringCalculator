@@ -1,11 +1,23 @@
 const customDelim = input => {
   let newInput;
+  let newDelim;
   if (input.match('//')) {
-    newLineSplit = input.split(/\\n/).join()
+
+  // conditional for finding if custom delimiter is single character or multi character
+  // based on existence of brackets
+    if (input[2] === '[') {
+      // match method uses regex to find everything between brackets
+      const inputDelim = input.match(/\[.*?\]/g).toString(); 
+      newDelim = inputDelim.slice(1, inputDelim.length - 1)
+    } else {
+      newDelim = input[2];
+    }
+
+    newLineSplit = input.split(/\\n/).join();
     newInput = newLineSplit
-    .replace(/[a-z]/g, 0)
-    .split(input[2]) // splits on the custom dilimiter
+    .split(newDelim) // splits on the custom dilimiter
     .join()
+    .replace(/[a-z]/g, 0)
     .split(','); // splits one more time to complete separation
   } else {
     newInput = input
@@ -18,7 +30,7 @@ const customDelim = input => {
 }
 
 const addNumbers = string => {
-  let newString = customDelim(string)
+  const newString = customDelim(string)
   const posArray = [];
   const negArray = [];
   let sum = '';
@@ -49,7 +61,6 @@ const addNumbers = string => {
   }
 
   // send back sum and any denied negative numbers
-  // const result = sum;
   const result = {
     sum: sum.toString(),
     exceptions: negArray

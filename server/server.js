@@ -9,8 +9,7 @@ app.use(express.json());
 
 app.post('/', (req, res) => {
   const input = req.body.input;
-  
-  // send results back as a string
+
   res.send(logic.addNumbers(input));
 });
 
