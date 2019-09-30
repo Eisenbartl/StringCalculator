@@ -1,8 +1,8 @@
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 const should = require('chai').should;
-const addNumbers = require('../server/logic').addNumbers;
-const customDelim = require('../server/logic').customDelim;
+const addNumbers = require('../server/addNumbers');
+const customDelim = require('../server/customDelim');
 
 describe('Logic', () => {
   // customDemlim function tests
@@ -30,6 +30,10 @@ describe('Logic', () => {
 
     it('customDelim should accept a custom delimiter regardless of size or characters', () => {
       expect(customDelim('//[@@@]\n1@@@2@@@3@@@4')).to.eql(['//[', ']\n1', '2', '3', '4']);
+    });
+
+    it('customDelim should accept multiple delimiters of any length', () => {
+      expect(customDelim('//[*][!!][r9r]\n11r9r22*33!!44')).to.eql([ '//[', '][', '][', ']\n11', '22', '33', '44' ]);
     });
   });
 
@@ -111,6 +115,11 @@ describe('Logic', () => {
     // brackets are somehow causing the mismatch
     it('should support custom delimiters of any size regardless of character', () => {
       expect(addNumbers('//[&&&]\n5&&&4')).to.eql({ sum: '9', exceptions: [] });
+    });
+
+    // test fails, app returns correct number, but test actual does not match test expected
+    it('should support multiple custom delimiters of any length', () => {
+      expect(addNumbers('//[*][!!][r9r]\n11r9r22*33!!44')).to.eql({ sum: '110', exceptions: [] });
     });
   });
 });
